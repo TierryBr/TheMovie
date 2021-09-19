@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as StoreProvider } from 'react-redux';
-import MovieList from './src/screens/MovieList';
 
 import './src/config/ReactotronConfig';
 
 import store from './src/store';
+
+import {Routes} from './src/routes';
 
 export default function App() {
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function App() {
 
   return (
     <StoreProvider store={store}>
-      <MovieList />
+      <Routes />
     </StoreProvider>
   );
 }
