@@ -1,19 +1,22 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator  } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Home from '../src/screens/Home';
 import Search from '../src/screens/Search';
 import More from '../src/screens/More';
+import Details from '../src/screens/Details';
+import Header from './components/Header';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export function Routes() {
+function Tabs() {
   return (
-    <NavigationContainer>
-      <Navigator
+    <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName: any;
@@ -34,22 +37,52 @@ export function Routes() {
           tabBarLabelStyle: {fontSize: 13, fontWeight: 'bold'}
         })}
       >
-        <Screen
+        <Tab.Screen
           name="Home"
           component={Home}
-          options={{headerShown: true }}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Home"/>
+          }}
         />
-        <Screen
+        <Tab.Screen
           name="Buscar"
           component={Search}
-          options={{headerShown: false }}
+          options={{
+            headerShown: true,
+            header: () => <Header showFilter={false} title="Buscar"/>
+          }}
         />
-        <Screen
+        <Tab.Screen
           name="Mais"
           component={More}
+          options={{
+            headerShown: true,
+            header: () => <Header showFilter={false} title="Mais"/>
+          }}
+        />
+      </Tab.Navigator>
+  );
+}
+
+export function Routes() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={Tabs}
           options={{headerShown: false }}
         />
-      </Navigator>
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={{
+            headerShown: true,
+            header: () => <Header showFilter={false} title="Detalhes"/>
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

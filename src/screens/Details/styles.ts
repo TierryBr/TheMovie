@@ -5,10 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 40,
     color: '#000'
-  },
-  list: {
-    width: '100%',
-    padding: 20,
   }
 });

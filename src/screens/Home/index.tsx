@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StatusBar, FlatList, Image } from 'react-native';
+import { View, Text, StatusBar, FlatList, Image, TouchableOpacity } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
@@ -8,7 +8,8 @@ import * as MoviesActions from '../../store/ducks/movies/actions';
 import { Movies } from '../../store/ducks/movies/types';
 
 import { styles } from './styles';
-import { loadRequest } from '../../store/ducks/movies/actions';
+import { useNavigation } from '@react-navigation/native';
+import Movie from '../../components/Movie';
 
 interface StateProps {
   movies: Movies[];
@@ -29,6 +30,12 @@ function MovieList() {
     dispatch(MoviesActions.loadRequest());
   };
 
+  const navigation = useNavigation();
+
+  function handleNavigateDetails() {
+    navigation.navigate('Details' as any);
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -36,20 +43,15 @@ function MovieList() {
         backgroundColor="transparent"
         translucent
       />
-      <Text>ola mundo</Text>
       
       <FlatList
         style={styles.list}
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Image style={styles.image} source={{
-              uri: `https://image.tmdb.org/t/p/w1280/${item.poster_path}`
-            }}/>
-            <Text>{item.title}</Text>
-          </View>
+          <Movie data={item} onPress={handleNavigateDetails}/>
         )}
+        contentContainerStyle={{paddingBottom: 69}}
       />
     </View>
   );
