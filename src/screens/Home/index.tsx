@@ -32,8 +32,8 @@ function MovieList() {
 
   const navigation = useNavigation();
 
-  function handleNavigateDetails() {
-    navigation.navigate('Details' as any);
+  function handleNavigateDetails(id: string) {
+    navigation.navigate('Details', {id});
   }
 
   return (
@@ -49,7 +49,7 @@ function MovieList() {
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Movie data={item} onPress={handleNavigateDetails}/>
+          <Movie data={item} onPress={() => handleNavigateDetails(item.id)}/>
         )}
         contentContainerStyle={{paddingBottom: 69}}
       />

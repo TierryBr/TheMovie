@@ -7,5 +7,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     color: '#000'
+  },
+  image: {
+    width: 200,
+    height: 120,
   }
 });
