@@ -1,15 +1,40 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    color: '#000'
-  },
-  image: {
-    width: 200,
-    height: 120,
-  }
-});
+export const DetailContainer = styled.ScrollView`
+  width: 100%;
+`;
+
+export const Backdrop = styled.Image`
+  width: 100%;
+  height: 220px;
+`;
+
+export const Title = styled.Text`
+  font-weight: bold;
+  font-size: 30px;
+  padding: 10px;
+`;
+
+export const Overview = styled.Text`
+  font-size: 15px;
+`;
+
+export const InfoContent = styled.View`
+  margin-right: 35px;
+`;
+
+export const TitleInfo = styled.Text`
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+export const ProductionLogo = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+`;
+
+
+
+
+

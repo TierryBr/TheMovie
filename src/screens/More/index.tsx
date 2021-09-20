@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { styles } from './styles';
+import {MoreContainer} from './styles';
 
 export default function More() {
   return (
-    <View style={styles.container}>
+    <MoreContainer>
       <Text>mais opções</Text>
-    </View>
+    </MoreContainer>
   );
 }

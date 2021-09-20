@@ -1,37 +1,42 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginBottom: 25
-  },
-  image: {
-    width: 120,
-    height: 160,
-    borderRadius: 8
-  },
-  content: {
-    marginLeft: 20
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 25
-  },
-  year: {
-    fontSize: 18
-  },
-  vote: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  numbervote: {
-    fontSize: 18,
-    backgroundColor: 'gray',
-    color: '#fff',
-    width: 70,
-    borderRadius: 15,
-    padding: 3,
-    textAlign: 'center'
-  }
-});
+export const Movie = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+  width: 80%
+`;
+
+export const Poster = styled.Image`
+  width: 120px;
+  height: 160px;
+  border-radius: 8px;
+`;
+
+export const Content = styled.View`
+  margin-left: 20px;
+`;
+  
+  export const Title = styled.Text`
+  font-weight: bold;
+  font-size: 22px;
+`;
+
+export const Year = styled.Text`
+  font-size: 15px;
+`;
+
+export const Vote = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+export const NumberVote = styled.Text`
+  font-size: 18px;
+  background-color: gray;
+  color: #fff;
+  width: 70px;
+  border-radius: 15px;
+  padding: 3px;
+  text-align: center;
+`;

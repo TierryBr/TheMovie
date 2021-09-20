@@ -7,9 +7,9 @@ import { ApplicationState } from '../../store';
 import * as MoviesActions from '../../store/ducks/movies/actions';
 import { Movies } from '../../store/ducks/movies/types';
 
-import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Movie from '../../components/Movie';
+import {ListMovie} from './styles';
 
 interface StateProps {
   movies: Movies[];
@@ -37,7 +37,7 @@ function MovieList() {
   }
 
   return (
-    <View style={styles.container}>
+    <ListMovie>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
@@ -45,7 +45,6 @@ function MovieList() {
       />
       
       <FlatList
-        style={styles.list}
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -53,7 +52,7 @@ function MovieList() {
         )}
         contentContainerStyle={{paddingBottom: 69}}
       />
-    </View>
+    </ListMovie>
   );
 }
 

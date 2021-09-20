@@ -1,11 +1,9 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    color: '#000'
-  },
-});
+export const SearchContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  color: #000;
+`;

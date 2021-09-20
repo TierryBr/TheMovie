@@ -1,14 +1,10 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#000'
-  },
-  list: {
-    width: '100%',
-    padding: 20,
-  }
-});
+export const ListMovie = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  width: 100%;
+  padding-top: 20px;
+`;

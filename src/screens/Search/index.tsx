@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 
-import { styles } from './styles';
+import {SearchContainer} from './styles';
 
 export default function Search() {
   return (
-    <View style={styles.container}>
+    <SearchContainer >
       <Text>buscar filmes</Text>
-    </View>
+    </SearchContainer>
   );
 }
