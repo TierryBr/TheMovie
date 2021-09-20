@@ -4,6 +4,8 @@ import { useRoute } from '@react-navigation/native';
 
 import { styles } from './styles';
 import api from '../../services/api';
+import {unavailable, img_1280} from '../../config/Variables';
+import {REACT_APP_API_KEY} from '@env';
 
 interface RoutesParams {
   id: string
@@ -27,7 +29,7 @@ export default function Details() {
   const params = route.params as RoutesParams;
 
   useEffect(() => {
-    api.get(`/movie/${params.id}?api_key=bc232e75d0432d93f3c6d11fca222446`)
+    api.get(`/movie/${params.id}?api_key=${REACT_APP_API_KEY}`)
     .then(res => {
       setMovie(res.data);
     })
@@ -43,9 +45,7 @@ export default function Details() {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{
-          uri: `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
-      }}/>
+      <Image style={styles.image} source={(movie.poster_path) ? {uri: `${img_1280}/${movie.backdrop_path}`} : (unavailable) as any}/>
       <Text>{movie.title}</Text>
       <Text>{movie.overview}</Text>
     </View>

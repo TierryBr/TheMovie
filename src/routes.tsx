@@ -38,11 +38,11 @@ function Tabs() {
               iconName = focused ? 'ios-menu-outline' : 'ios-menu-outline';
             }
 
-            return <Icon name={iconName} size={25} color={color} />;
+            return <Icon name={iconName} size={25} color={color} style={{marginTop: 2}}/>;
           },
           tabBarActiveTintColor: '#1f2eb6',
           tabBarInactiveTintColor: 'gray',
-          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', marginBottom: 2}
+          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', marginBottom: 3}
         })}
       >
         <Tab.Screen

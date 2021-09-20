@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import {unavailable, img_1280} from '../../config/Variables';
 
 import { styles } from './styles';
 
@@ -15,17 +15,16 @@ export type MoviesProps = {
   backdrop_path: string
 }
 
-type Props = RectButtonProps & {
+type Props = {
   data: MoviesProps
 }
 
 export default function Movies({data,...rest}: Props) {
+
   return (
     <TouchableOpacity {...rest}>
       <View style={styles.container}>
-        <Image style={styles.image} source={{
-          uri: `https://image.tmdb.org/t/p/w1280/${data.poster_path}`
-        }}/>
+        <Image style={styles.image} source={(data.poster_path) ? {uri: `${img_1280}/${data.poster_path}`} : (unavailable) as any}/>
         <View style={styles.content}>
           <Text style={styles.title}>{data.title}</Text>
           <Text style={styles.year}>{data.release_date.slice(0, 4)} - {data.original_language.toUpperCase()}</Text>
