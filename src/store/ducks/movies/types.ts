@@ -10,7 +10,7 @@ export interface Movies {
   overview: string,
   original_language: string,
   release_date: string,
-  vote_average: string,
+  vote_average: number,
   poster_path: string,
   backdrop_path: string
 }

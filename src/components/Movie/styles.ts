@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Movie = styled.View`
   flex-direction: row;
   justify-content: flex-start;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   width: 80%
 `;
 
@@ -31,12 +31,20 @@ export const Vote = styled.View`
   justify-content: flex-end;
 `;
 
-export const NumberVote = styled.Text`
+export const NumberVoteGreen = styled.Text`
   font-size: 18px;
-  background-color: gray;
+  background-color: #60BF8F;
   color: #fff;
-  width: 70px;
+  width: 55px;
   border-radius: 15px;
-  padding: 3px;
+  padding: 1px;
   text-align: center;
+`;
+
+export const NumberVoteRed = styled(NumberVoteGreen)`
+  background-color: #FA5743;
+`;
+
+export const NumberVoteYellow = styled(NumberVoteGreen)`
+  background-color: #C49D54;
 `;

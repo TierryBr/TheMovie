@@ -40,7 +40,7 @@ function Tabs() {
 
             return <Icon name={iconName} size={25} color={color} style={{marginTop: 2}}/>;
           },
-          tabBarActiveTintColor: '#1f2eb6',
+          tabBarActiveTintColor: '#6485D2',
           tabBarInactiveTintColor: 'gray',
           tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', marginBottom: 3}
         })}
@@ -87,7 +87,6 @@ export function Routes() {
           component={Tabs}
           options={{
             headerShown: false, 
-            
           }}
         />
         <Stack.Screen

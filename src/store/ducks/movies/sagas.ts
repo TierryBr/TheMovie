@@ -3,9 +3,11 @@ import api from '../../../services/api';
 
 import { loadSucces, loadError } from '../movies/actions';
 
+import {REACT_APP_API_KEY} from '@env';
+
 export default function* load(): any {
   try{
-    const response = yield call(api.get, '/movie/popular?api_key=bc232e75d0432d93f3c6d11fca222446');
+    const response = yield call(api.get, `/movie/popular?api_key=${REACT_APP_API_KEY}`);
 
     yield put(loadSucces(response.data.results));
   } catch(err) {
