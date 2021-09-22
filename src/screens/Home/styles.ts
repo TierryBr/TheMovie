@@ -14,10 +14,11 @@ export const More = styled.TouchableOpacity`
   margin: -30px auto;
   border-radius: 20px;
   margin-bottom: 50px;
-  border: 1px solid #000;
+  border: 1px solid #6485D0;
 `;
 
 export const MoreText = styled.Text`
   justify-content: center;
+  color: #475E94;
   align-items: center;
 `;

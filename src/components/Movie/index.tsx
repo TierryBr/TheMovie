@@ -27,7 +27,7 @@ export default function Movies({data,...rest}: Props) {
         <Poster source={(data.poster_path) ? {uri: `${img_1280}/${data.poster_path}`} : (unavailable) as any}/>
         <Content >
           <Title ellipsizeMode='tail' numberOfLines={2} style={{width: 215}}>{data.title}</Title>
-          <Year >{data.release_date.slice(0, 4)} - {data.original_language.toUpperCase()}</Year>
+          <Year >{data.release_date} - {data.original_language.toUpperCase()}</Year>
           {data.vote_average >= 7 ? (
             <Vote >
               <NumberVoteGreen >{data.vote_average}</NumberVoteGreen>

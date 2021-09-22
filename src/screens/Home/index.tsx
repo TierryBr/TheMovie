@@ -15,6 +15,7 @@ import {REACT_APP_API_KEY} from '@env';
 
 import Genres from '../../components/Genres';
 import genre from '../../store/ducks/genres';
+import request from '../../services/api';
 
 
 interface StateProps {
@@ -27,15 +28,10 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-function MovieList() {
+function MovieList({route}: any) {
   const { data } = useSelector((state: ApplicationState) => state.movies);
   const [movie, setMovie] = useState(data);
   const [count, setCount] = useState(1);
-  
-
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [genres, setGenres] = useState([]);
-  const genreforURL = genre(selectedGenres);
 
   const dispatch = useDispatch();
   
@@ -43,20 +39,59 @@ function MovieList() {
     dispatch(MoviesActions.loadRequest());
     setMovie([...data]);
   };
-  
+
+  const {
+    params: { id = null, name = null, typeRequest = '' } = {}
+  } = route;
+
+  const getQueryRequest = () => {
+    if(typeRequest === '') {
+      api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`)
+      .then((res) => {
+        setMovie(res.data.results);
+        window.scroll(0,0); 
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+
+    if (typeRequest === 'discover') {
+      api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`, {
+        params: {
+          with_genres: `${id}`
+        }
+      })
+      .then((res) => {
+        setMovie(res.data.results);
+        window.scroll(0,0); 
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+
+    if (typeRequest === 'search') {
+      api.get(`search/movie?api_key=${REACT_APP_API_KEY}&page=${count}`, {
+        params: {
+          query: `${name}`
+        }
+      })
+      .then((res) => {
+        setMovie(res.data.results);
+        window.scroll(0,0); 
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+
+    return null;
+  };
+
   useEffect(() => {
-
-    api.get(`/movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}&with_genres=${genreforURL}`)
-    .then((res) => {
-      setMovie(res.data.results);
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-
-    console.log(genreforURL)
-
-  }, [genreforURL, count]);
+    getQueryRequest()
+  }, [count]);
   
   const navigation = useNavigation();
   
@@ -66,7 +101,7 @@ function MovieList() {
   
   const handleMore = useCallback(async () => {
     try {
-      const response = await api.get(`/movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}&with_genres=${genreforURL}`);
+      const response = await api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`);
       setMovie([...movie, ...response.data.results]);
       setCount(count + 1);
       window.scroll(0,0); 
@@ -90,13 +125,6 @@ function MovieList() {
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
-      />
-
-      <Genres 
-        selectedGenres={selectedGenres} 
-        setSelectedGenres={setSelectedGenres} 
-        genres={genres} 
-        setGenres={setGenres}
       />
 
       <FlatList

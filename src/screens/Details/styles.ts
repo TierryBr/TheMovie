@@ -25,6 +25,7 @@ export const InfoContent = styled.View`
 
 export const TitleInfo = styled.Text`
   font-weight: bold;
+  color: #5672B3;
   font-size: 18px;
 `;
 

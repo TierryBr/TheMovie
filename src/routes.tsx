@@ -12,13 +12,15 @@ import Details from '../src/screens/Details';
 import Filter from './components/Filter';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
-function Tabs() {
+export function Routes() {
   return (
+  <NavigationContainer>
+
     <Tab.Navigator
+        initialRouteName={'DetailsMovie'}
         screenOptions={({ route }) => ({
-          headerShown: true,
+          headerShown: false,
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
@@ -32,7 +34,7 @@ function Tabs() {
 
             if (route.name === 'Home') {
               iconName = focused ? 'ios-home-outline' : 'ios-home-outline';
-            } else if (route.name === 'Buscar') {
+            } else if (route.name === 'Search') {
               iconName = focused ? 'ios-search-outline' : 'ios-search-outline';
             } else if (route.name === 'Mais') {
               iconName = focused ? 'ios-menu-outline' : 'ios-menu-outline';
@@ -47,14 +49,14 @@ function Tabs() {
       >
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={MoviesStackScreen}
           options={{
-            headerRight: () => <Filter /> 
+            title: 'Home', 
           }}
         />
         <Tab.Screen
-          name="Buscar"
-          component={Search}
+          name="Search"
+          component={SearchStackScreen}
           options={{
             title: 'Buscar',
           }}
@@ -67,13 +69,14 @@ function Tabs() {
           }}
         />
       </Tab.Navigator>
+  </NavigationContainer>
+
   );
 }
 
-export function Routes() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
+const HomeStack = createNativeStackNavigator();
+export const MoviesStackScreen = () => (
+    <HomeStack.Navigator
         screenOptions={{
           headerTitleAlign: 'center',
           headerTitleStyle: {
@@ -82,22 +85,59 @@ export function Routes() {
           },
         }}
       >
-        <Stack.Screen
-          name="home"
-          component={Tabs}
+        <HomeStack.Screen
+          name="Home"
+          component={Home}
           options={{
-            headerShown: false, 
+            headerShown: true, 
           }}
         />
-        <Stack.Screen
+        <HomeStack.Screen
           name="Details"
           component={Details}
           options={{
             headerShown: true,
-            title: 'Detalhes',
+            title: 'Informações do filme',
           }}
         />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+      </HomeStack.Navigator>
+);
+
+const SearchStack = createNativeStackNavigator();
+export const SearchStackScreen = () => (
+    <SearchStack.Navigator
+        screenOptions={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+          },
+        }}
+      >
+        <SearchStack.Screen
+          name="Search"
+          component={Search}
+          options={{
+            headerShown: true, 
+            title: "Pesquisar"
+          }}
+        />
+        <SearchStack.Screen
+          name="SearchResults"
+          component={Home}
+          options={{
+            headerShown: true, 
+            title: "Resultados da pesquisa"
+          }}
+        />
+        <SearchStack.Screen
+          name="MovieDetails"
+          component={Details}
+          options={{
+            headerShown: true,
+            title: 'Informações do filme',
+          }}
+        />
+      </SearchStack.Navigator>
+);
+
