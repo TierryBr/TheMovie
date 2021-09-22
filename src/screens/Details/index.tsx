@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import api from '../../services/api';
@@ -50,7 +50,7 @@ export default function Details() {
   if(!movie) {
     return (
       <DetailContainer>
-        <Text>Carregandoo...</Text>
+        <ActivityIndicator />
       </DetailContainer>
     );
   }
@@ -90,7 +90,7 @@ export default function Details() {
                       return (
                         <View style={{marginRight: 20, alignItems: 'center'}}>
                           <ProductionLogo source={(production.logo_path) ? {uri: `${img_1280}/${production.logo_path}`} : (unavailable) as any}/>
-                          <Overview key={production.id}>{production.name}</Overview>
+                          <Overview key={production.id}>{production.name.slice(0,15)}</Overview>
                         </View>
                       )
                     })}

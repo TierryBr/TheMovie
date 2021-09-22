@@ -13,6 +13,10 @@ import {ListMovie, More, MoreText} from './styles';
 import api from '../../services/api';
 import {REACT_APP_API_KEY} from '@env';
 
+import Genres from '../../components/Genres';
+import genre from '../../store/ducks/genres';
+
+
 interface StateProps {
   movies: Movies[];
 }
@@ -26,18 +30,33 @@ type Props = StateProps & DispatchProps;
 function MovieList() {
   const { data } = useSelector((state: ApplicationState) => state.movies);
   const [movie, setMovie] = useState(data);
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(1);
+  
+
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const genreforURL = genre(selectedGenres);
 
   const dispatch = useDispatch();
   
   const getMovies = () => {
     dispatch(MoviesActions.loadRequest());
+    setMovie([...data]);
   };
   
   useEffect(() => {
-    getMovies();
-    setMovie([...data]);
-  }, [data])
+
+    api.get(`/movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}&with_genres=${genreforURL}`)
+    .then((res) => {
+      setMovie(res.data.results);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+    console.log(genreforURL)
+
+  }, [genreforURL, count]);
   
   const navigation = useNavigation();
   
@@ -47,15 +66,15 @@ function MovieList() {
   
   const handleMore = useCallback(async () => {
     try {
+      const response = await api.get(`/movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}&with_genres=${genreforURL}`);
+      setMovie([...movie, ...response.data.results]);
       setCount(count + 1);
-      const response = await api.get(`/movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`);
-      setMovie([...data, ...response.data.results]);
       window.scroll(0,0); 
     }
     catch(error) {
       console.log(error);
     }
-  }, [movie]);
+  }, [movie, count]);
 
   const renderFooter = () => {
     return (
@@ -72,7 +91,14 @@ function MovieList() {
         backgroundColor="transparent"
         translucent
       />
-      
+
+      <Genres 
+        selectedGenres={selectedGenres} 
+        setSelectedGenres={setSelectedGenres} 
+        genres={genres} 
+        setGenres={setGenres}
+      />
+
       <FlatList
         data={movie}
         keyExtractor={(item) => item.id}
