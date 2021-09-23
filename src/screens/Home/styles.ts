@@ -1,19 +1,19 @@
 import styled from 'styled-components/native';
 
-export const ListMovie = styled.ScrollView`
+export const ListMovie = styled.View`
   color: #000;
   width: 100%;
-  padding: 20px;
+  padding: 0 0 0 20px;
 `;
 
-export const More = styled.TouchableOpacity`
+export const LoadMore = styled.TouchableOpacity`
   width: 150px;
   height: 35px;
   justify-content: center;
   align-items: center;
-  margin: -30px auto;
+  margin: 30px auto;
   border-radius: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   border: 1px solid #6485D0;
 `;
 

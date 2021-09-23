@@ -32,11 +32,11 @@ export function Routes() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName: any;
 
-            if (route.name === 'Home') {
+            if (route.name === 'HomeTab') {
               iconName = focused ? 'ios-home-outline' : 'ios-home-outline';
-            } else if (route.name === 'Search') {
+            } else if (route.name === 'SearchTab') {
               iconName = focused ? 'ios-search-outline' : 'ios-search-outline';
-            } else if (route.name === 'Mais') {
+            } else if (route.name === 'MoreTab') {
               iconName = focused ? 'ios-menu-outline' : 'ios-menu-outline';
             }
 
@@ -48,21 +48,21 @@ export function Routes() {
         })}
       >
         <Tab.Screen
-          name="Home"
+          name="HomeTab"
           component={MoviesStackScreen}
           options={{
             title: 'Home', 
           }}
         />
         <Tab.Screen
-          name="Search"
+          name="SearchTab"
           component={SearchStackScreen}
           options={{
             title: 'Buscar',
           }}
         />
         <Tab.Screen
-          name="Mais"
+          name="MoreTab"
           component={More}
           options={{
             title: 'Mais',

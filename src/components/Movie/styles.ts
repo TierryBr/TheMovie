@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Movie = styled.View`
   flex-direction: row;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-top: 25px;
   width: 80%
 `;
 

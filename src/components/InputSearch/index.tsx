@@ -5,10 +5,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {Container, ContainerInput, InputDirection, TextInputTyped} from './styles';
 
-const InputSearch = ({ navigate }) => {
+const InputSearch = ({ navigate }: any) => {
   const [search, setSearch] = useState('');
 
-  const onChangeSearch = value => {
+  const onChangeSearch = (value: string) => {
     setSearch(value);
   };
 

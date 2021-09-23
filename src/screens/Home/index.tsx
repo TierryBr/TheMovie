@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, StatusBar, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, StatusBar, FlatList, ActivityIndicator } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
@@ -9,13 +9,9 @@ import { Movies } from '../../store/ducks/movies/types';
 
 import { useNavigation } from '@react-navigation/native';
 import Movie from '../../components/Movie';
-import {ListMovie, More, MoreText} from './styles';
+import {ListMovie, LoadMore, MoreText} from './styles';
 import api from '../../services/api';
 import {REACT_APP_API_KEY} from '@env';
-
-import Genres from '../../components/Genres';
-import genre from '../../store/ducks/genres';
-import request from '../../services/api';
 
 
 interface StateProps {
@@ -40,9 +36,7 @@ function MovieList({route}: any) {
     setMovie([...data]);
   };
 
-  const {
-    params: { id = null, name = null, typeRequest = '' } = {}
-  } = route;
+  const { params: { id = null, name = null, typeRequest = '' } = {} } = route;
 
   const getQueryRequest = () => {
     if(typeRequest === '') {
@@ -101,10 +95,33 @@ function MovieList({route}: any) {
   
   const handleMore = useCallback(async () => {
     try {
-      const response = await api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`);
-      setMovie([...movie, ...response.data.results]);
-      setCount(count + 1);
-      window.scroll(0,0); 
+      if(typeRequest === '') {
+        const response = await api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`);
+        setMovie([...movie, ...response.data.results]);
+        setCount(count + 1);
+        window.scroll(0,0); 
+      }
+      if (typeRequest === 'discover') {
+        const response = await api.get(`movie/popular?api_key=${REACT_APP_API_KEY}&page=${count}`, {
+          params: {
+            with_genres: `${id}`
+          }
+        });
+        setMovie([...movie, ...response.data.results]);
+        setCount(count + 1);
+        window.scroll(0,0); 
+      }
+      if (typeRequest === 'search') {
+        const response = await api.get(`search/movie?api_key=${REACT_APP_API_KEY}&page=${count}`, {
+          params: {
+            query: `${name}`
+          }
+        });
+        setMovie([...movie, ...response.data.results]);
+        setCount(count + 1);
+        window.scroll(0,0); 
+      }
+
     }
     catch(error) {
       console.log(error);
@@ -114,7 +131,11 @@ function MovieList({route}: any) {
   const renderFooter = () => {
     return (
       <View>
-        <ActivityIndicator />
+        <ActivityIndicator style={{marginTop: 25}} />
+
+        <LoadMore onPress={handleMore}>
+          <MoreText>Ver mais</MoreText>
+        </LoadMore>
       </View>
     )
   }
@@ -131,15 +152,16 @@ function MovieList({route}: any) {
         data={movie}
         keyExtractor={(item) => item.id}
         ListFooterComponent={renderFooter}
+        // onEndReached={handleMore}
+        // initialNumToRender = {10}
+        // onEndReachedThreshold={0.7}
         renderItem={({ item }) => (
-          <Movie data={item} onPress={() => handleNavigateDetails(item.id)}/>
+          <Movie key={item.id} data={item} onPress={() => handleNavigateDetails(item.id)}/>
         )}
         contentContainerStyle={{paddingBottom: 69}}
       />
       
-      <More onPress={handleMore}>
-        <MoreText>Ver mais</MoreText>
-      </More>
+      
 
     </ListMovie>
   );

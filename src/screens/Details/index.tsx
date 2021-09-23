@@ -3,7 +3,8 @@ import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import api from '../../services/api';
-import {unavailable, img_1280} from '../../config/Variables';
+import {img_1280} from '../../config/Variables';
+import unavailable from '../../assets/unavailable.jpg';
 import {REACT_APP_API_KEY} from '@env';
 import {DetailContainer, Backdrop, Title, Overview, InfoContent, TitleInfo, ProductionLogo} from './styles';
 
@@ -57,7 +58,7 @@ export default function Details() {
 
   return (
     <DetailContainer>
-      <Backdrop source={(movie.poster_path) ? {uri: `${img_1280}/${movie.backdrop_path}`} : (unavailable) as any}/>
+      <Backdrop source={(movie.poster_path) ? {uri: `${img_1280}/${movie.backdrop_path}`} : unavailable }/>
       <Title>{movie.title}</Title>
       <View style={{padding: 10}}>
         <TitleInfo>Descrição</TitleInfo>
@@ -88,8 +89,8 @@ export default function Details() {
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 100}}>
                     {movie.production_companies.map(production => {
                       return (
-                        <View style={{marginRight: 20, alignItems: 'center'}}>
-                          <ProductionLogo source={(production.logo_path) ? {uri: `${img_1280}/${production.logo_path}`} : (unavailable) as any}/>
+                        <View key={production.id} style={{marginRight: 20, alignItems: 'center'}}>
+                          <ProductionLogo source={(production.logo_path) ? {uri: `${img_1280}/${production.logo_path}`} : unavailable}/>
                           <Overview key={production.id}>{production.name.slice(0,15)}</Overview>
                         </View>
                       )

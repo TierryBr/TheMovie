@@ -6,22 +6,22 @@ export const Container = styled.View`
 `;
 
 export const GenreList = styled.ScrollView`
-  margin-top: 25;
+  margin-top: 25px;
 `;
 
 export const GenreName = styled.Text`
-  font-size: 20;
+  font-size: 20px;
   text-align: center;
   color: #fff;
 `;
 
 export const GenreItem = styled.TouchableOpacity`
-  width: 250;
-  height: 35;
+  width: 250px;
+  height: 35px;
   margin: auto;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15;
+  margin-bottom: 15px;
   background-color: #6485D0;
   border-radius: 20px
 `;

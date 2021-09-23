@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, Text, View, TouchableOpacity } from 'react-native';
-import {unavailable, img_1280} from '../../config/Variables';
+import { TouchableOpacity } from 'react-native';
+import {img_1280} from '../../config/Variables';
+
+import unavailable from '../../assets/unavailable.jpg';
 
 import {Movie, Poster, Content, Title, Year, Vote, NumberVoteGreen, NumberVoteRed, NumberVoteYellow} from './styles';
 
@@ -24,7 +26,7 @@ export default function Movies({data,...rest}: Props) {
   return (
     <TouchableOpacity {...rest}>
       <Movie >
-        <Poster source={(data.poster_path) ? {uri: `${img_1280}/${data.poster_path}`} : (unavailable) as any}/>
+        <Poster source={(data.poster_path) ? {uri: `${img_1280}/${data.poster_path}`} : unavailable}/>
         <Content >
           <Title ellipsizeMode='tail' numberOfLines={2} style={{width: 215}}>{data.title}</Title>
           <Year >{data.release_date} - {data.original_language.toUpperCase()}</Year>
