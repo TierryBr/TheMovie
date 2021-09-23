@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const DetailContainer = styled.ScrollView`
   width: 100%;
+  background-color: ${props => props.theme.colors.background};
 `;
 
 export const Backdrop = styled.Image`
@@ -13,10 +14,12 @@ export const Title = styled.Text`
   font-weight: bold;
   font-size: 30px;
   padding: 10px;
+  color: ${props => props.theme.colors.text};
 `;
 
 export const Overview = styled.Text`
   font-size: 15px;
+  color: ${props => props.theme.colors.text};
 `;
 
 export const InfoContent = styled.View`
@@ -25,7 +28,7 @@ export const InfoContent = styled.View`
 
 export const TitleInfo = styled.Text`
   font-weight: bold;
-  color: #5672B3;
+  color: ${props => props.theme.colors.secondary};;
   font-size: 18px;
 `;
 

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
 `;
 
 export const GenreList = styled.ScrollView`
@@ -12,7 +12,7 @@ export const GenreList = styled.ScrollView`
 export const GenreName = styled.Text`
   font-size: 20px;
   text-align: center;
-  color: #fff;
+  color: ${props => props.theme.colors.background};;
 `;
 
 export const GenreItem = styled.TouchableOpacity`
@@ -22,6 +22,6 @@ export const GenreItem = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
-  background-color: #6485D0;
+  background-color: ${props => props.theme.colors.secondary};
   border-radius: 20px
 `;

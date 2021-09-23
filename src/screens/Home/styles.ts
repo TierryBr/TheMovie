@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
 
 export const ListMovie = styled.View`
-  color: #000;
+  color: ${props => props.theme.colors.text};
   width: 100%;
   padding: 0 0 0 20px;
+  background-color: ${props => props.theme.colors.background}
 `;
 
 export const LoadMore = styled.TouchableOpacity`
@@ -19,6 +20,6 @@ export const LoadMore = styled.TouchableOpacity`
 
 export const MoreText = styled.Text`
   justify-content: center;
-  color: #475E94;
+  color: ${props => props.theme.colors.text};
   align-items: center;
 `;

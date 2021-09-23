@@ -20,10 +20,12 @@ export const Content = styled.View`
   export const Title = styled.Text`
   font-weight: bold;
   font-size: 22px;
+  color: ${props => props.theme.colors.text};
 `;
 
 export const Year = styled.Text`
   font-size: 15px;
+  color: ${props => props.theme.colors.text}
 `;
 
 export const Vote = styled.View`
@@ -36,8 +38,9 @@ export const NumberVoteGreen = styled.Text`
   background-color: #60BF8F;
   color: #fff;
   width: 55px;
-  border-radius: 15px;
-  padding: 1px;
+  border-radius: 35px;
+  margin: 0 20px;
+  padding: 7px;
   text-align: center;
 `;
 
